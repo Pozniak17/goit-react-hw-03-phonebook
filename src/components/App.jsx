@@ -57,15 +57,24 @@ export class App extends Component {
     );
   };
 
+  // при монтуванні
   componentDidMount() {
+    //* показати все що є в localStorage зараз, буде JSON формат
     const contacts = localStorage.getItem('contacts');
+    // console.log(contacts);
+
+    //* json формат приводимо до вигляду об'єкту
     const parsedContacts = JSON.parse(contacts);
     // console.log(parsedContacts);
+
+    console.log(this.getVisibleTodos());
+    //* перевірка, якщо якийся об'єкт є в localStorage => то записуємо в state, якщо ж немаж то не буде виконуватися if і не буде null
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
   }
 
+  // якщо оновився state, поточний state не дорівнює попередньому стану => записуємо в localStarage
   componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
@@ -91,3 +100,5 @@ export class App extends Component {
     );
   }
 }
+
+// 21:47

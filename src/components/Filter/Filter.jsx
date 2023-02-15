@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { FilterLabel, FilterInput } from './Filter';
 
 export const Filter = ({ value, onChange }) => (
@@ -6,3 +7,7 @@ export const Filter = ({ value, onChange }) => (
     <FilterInput type="text" value={value} onChange={onChange} />
   </FilterLabel>
 );
+
+Filter.propTypes = {
+  value: PropTypes.string,
+};
