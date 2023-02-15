@@ -67,7 +67,6 @@ export class App extends Component {
     const parsedContacts = JSON.parse(contacts);
     // console.log(parsedContacts);
 
-    console.log(this.getVisibleTodos());
     //* перевірка, якщо якийся об'єкт є в localStorage => то записуємо в state, якщо ж немаж то не буде виконуватися if і не буде null
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
