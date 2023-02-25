@@ -2,10 +2,9 @@ import { Component } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm.jsx';
 import { ContactList } from './ContactList/ContactList.jsx';
-
 import { MainTitle, ContactTitle } from '../components/styles/GeneralStyles';
-
 import { Filter } from './Filter/Filter.jsx';
+import { save } from './Storage/Storage.js';
 
 export class App extends Component {
   state = {
@@ -62,21 +61,23 @@ export class App extends Component {
     //* показати все що є в localStorage зараз, буде JSON формат
     const contacts = localStorage.getItem('contacts');
     // console.log(contacts);
-
     //* json формат приводимо до вигляду об'єкту
     const parsedContacts = JSON.parse(contacts);
     // console.log(parsedContacts);
-
     //* перевірка, якщо якийся об'єкт є в localStorage => то записуємо в state, якщо ж немаж то не буде виконуватися if і не буде null
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
+
+    // load('contacts', this.state.contacts);
   }
 
   // якщо оновився state, поточний state не дорівнює попередньому стану => записуємо в localStarage
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts !== prevState.contacts) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    const { contacts } = this.state;
+    if (contacts !== prevState.contacts) {
+      // localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+      return save('contacts', contacts);
     }
   }
 
